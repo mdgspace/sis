@@ -1,4 +1,8 @@
 import os
+import re
+from sis import patterns
+
+allowed_patterns = []
 
 def init():
     pass
@@ -6,12 +10,13 @@ def init():
 def load_apps():
     apps = os.environ.get("APPS")
     
+def route(message: str):
+    print("Routing")
+    for pattern in patterns.patterns:
+        if re.match(pattern[0], message):
+            # print(f"Matched {pattern[0]}")
+            return pattern[1]()
+        
 
-def resolve_message(message: str):
-    bot = message.split()[0]
-    if bot == "sis":
-        return "sisbot"
-    elif bot == "bro":
-        return "bro"
-    else:
-        return None
+if __name__ == "__main__":
+    route("bro help")
