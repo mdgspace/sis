@@ -1,4 +1,1 @@
-bot_modules = {
-    "sis": True,
-    "bro": False
-}
+bot_modules = {"sis": True, "bro": False}

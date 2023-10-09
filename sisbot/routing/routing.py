@@ -4,8 +4,10 @@ from sis import patterns
 
 allowed_patterns = []
 
+
 def init():
     pass
+
 
 def load_apps():
     apps = os.environ.get("APPS")
