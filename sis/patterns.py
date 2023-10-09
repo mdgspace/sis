@@ -1,7 +1,7 @@
 import re
-from . import scripts
+from . import views
 
 patterns = [
-    (r"^bro\s", scripts.hi),
-    (r"^sis\s", scripts.sis)
+    (r"^bro\s", views.hi),
+    (r"^sis\s", views.sis)
 ]

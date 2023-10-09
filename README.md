@@ -35,8 +35,9 @@ poetry run py -m black .
 * `routing`         message to function/script mapping
 * `conf`            all configurations will end up here
 
-`bro` all the subcommands for bro come here
-* `app.py`          main file for bro bot
+`bro | sis` all the subcommands for bro come here
+* `patterns.py`     regex patterns and corresponding views
+* `views.py`        middleware for parsing message and calling scripts
 * `scripts`         all scripts related to bro
 
 ## 💬 For commit messages
