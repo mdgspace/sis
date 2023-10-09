@@ -2,9 +2,10 @@
 
 
 def hi():
-    print("ran scripts.hi")
-    return "Hi, bro!"
+    print("sis.views.hi()")
+    return "hi"
 
 
 def sis():
-    return "Hi, sis!"
+    print("sis.views.sis()")
+    return "sis"
