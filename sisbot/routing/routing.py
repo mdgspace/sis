@@ -1,25 +1,32 @@
 import os
 import re
-from sis import patterns
+from importlib import import_module
 
 allowed_patterns = []
 
 
 def init():
-    pass
+    load_apps()
 
 
 def load_apps():
-    apps = os.environ.get("APPS")
+    apps = list(os.environ.get("APPS").split(","))
+    # apps = ["bro", "sis"]
+    for app in apps:
+        mod = import_module(f"{app}.patterns")
+        for pattern in mod.patterns:
+            allowed_patterns.append(pattern)
 
 
 def route(message: str):
-    print("Routing")
-    for pattern in patterns.patterns:
+    response = ""
+    for pattern in allowed_patterns:
         if re.match(pattern[0], message):
-            # print(f"Matched {pattern[0]}")
-            return pattern[1]()
+            print(f"Matched {pattern[0]}")
+            # Not returning here so that allpatterns are matched
+            response = pattern[1]()
+    return response
 
 
 if __name__ == "__main__":
-    route("bro help")
+    load_apps()

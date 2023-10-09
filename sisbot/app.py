@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from slack_bolt import App
-from routing.routing import resolve_message, route
+from routing.routing import init, route
 
 load_dotenv()
 
@@ -10,12 +10,13 @@ app = App(
     signing_secret=os.environ.get("SLACK_SIGNING_SECRET"),
 )
 
+# Initialize routing
+init()
+
 
 @app.message()
 def message_hello(message, say):
-    print(message["text"])
     response = route(message["text"])
-    print(response)
     if response != None and response != "":
         say(response)
 
