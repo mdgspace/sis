@@ -24,6 +24,10 @@ Now you can run the app
 ```shell script
 poetry run py ./sisbot/app.py
 ```
+Update the events `Request URL`, ngrok is recommended to expose localhost server
+```shell script
+ngrok http 3000
+```
 Please use black for formatting
 ```shell script
 poetry run py -m black .
@@ -35,8 +39,9 @@ poetry run py -m black .
 * `routing`         message to function/script mapping
 * `conf`            all configurations will end up here
 
-`bro` all the subcommands for bro come here
-* `app.py`          main file for bro bot
+`bro | sis` all the subcommands for bro come here
+* `patterns.py`     regex patterns and corresponding views
+* `views.py`        middleware for parsing message and calling scripts
 * `scripts`         all scripts related to bro
 
 ## 💬 For commit messages
