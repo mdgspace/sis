@@ -1,6 +1,9 @@
 import os
 import re
 from importlib import import_module
+from dotenv import load_dotenv
+
+load_dotenv()
 
 allowed_patterns = []
 
@@ -10,7 +13,10 @@ def init():
 
 
 def load_apps():
-    apps = list(os.environ.get("APPS").split(","))
+    apps = [
+        "sis" , 
+        "bro"
+            ]
     # apps = ["bro", "sis"]
     for app in apps:
         mod = import_module(f"{app}.patterns")
@@ -30,3 +36,7 @@ def route(message: str):
 
 if __name__ == "__main__":
     load_apps()
+
+
+
+

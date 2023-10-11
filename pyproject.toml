@@ -8,6 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 slack-bolt = "^1.18.0"
+pyyml = "^0.0.2"
+python-dotenv = "^1.0.0"
+
 
 
 [tool.poetry.group.dev.dependencies]
