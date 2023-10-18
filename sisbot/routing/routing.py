@@ -1,9 +1,7 @@
 import os
 import re
 from importlib import import_module
-from dotenv import load_dotenv
 
-load_dotenv()
 
 allowed_patterns = []
 

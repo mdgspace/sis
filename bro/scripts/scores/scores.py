@@ -1,14 +1,9 @@
 import os
 import yaml
 from slack_bolt import App
-from slack_bolt.view import view
-from slack_bolt.view.blocks import SectionBlock, PlainTextObject, DividerBlock
-from slack_bolt.view.composition import MarkdownTextObject
 from . import services
 
 # Function to initialize user scores data from a YAML file
-
-
 
 def handle_user_score(message):
     filename = "user_scores.yaml"
@@ -38,23 +33,42 @@ def handle_bro_scores_message():
     user_scores_data = services.initialize_user_scores_from_file(filename)
     
     blocks = [
-        SectionBlock(
-            text=PlainTextObject(text="User Scores", emoji=True),
-        ),
-        DividerBlock(),
+        {
+            "type": "section",
+            "block_id": "user_scores",
+            "text": {
+                "type": "mrkdwn",
+                "text": "SCORECARD"
+            }
+        },
+        {
+            "type": "divider"
+        }
     ]
 
+    # Add user scores information to the blocks
     for user_info in user_scores_data.get("users", []):
+        name = user_info["name"]
+        score = user_info["score"]
         blocks.append(
-            SectionBlock(
-                text=MarkdownTextObject(text=f"{user_info['name']} - {user_info['score']}"),
-            )
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"*{name} - {score}*"
+                }
+            }
         )
 
-
-    view_data = view(type="modal", blocks=blocks)
-
-    return {
-        "text" : "User Scores:",
-        "blocks" : view_data
+    # Create a view with the blocks
+    view_data = {
+        "type": "modal",
+        "callback_id": "user_scores_modal",
+        "title": {
+            "type": "plain_text",
+            "text": "User Scores"
+        },
+        "blocks": blocks
     }
+    
+    return view_data

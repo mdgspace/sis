@@ -1,6 +1,6 @@
 
-from scripts.keys.keys import handle_key_claim , handle_bro_keys_message
-from scripts.scores.scores import handle_bro_scores_message, handle_user_score
+from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
+from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
 
 
 
@@ -17,7 +17,7 @@ def bro():
 def bro_keys_claim(message):
    handle_key_claim(message)
 
-def bro_keys(message): 
+def bro_keys(): 
     handle_bro_keys_message()
 
 def bro_user_scores(message):

@@ -4,6 +4,8 @@ from slack_bolt import App
 from routing.routing import init, route
 
 load_dotenv()
+os.environ.setdefault('APPS', '.conf.settings.APPS')
+
 
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
