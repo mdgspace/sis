@@ -1,20 +1,49 @@
-import yaml
+from ...services import redisService
+import re
+from .schema import scores_data_schema
+redis_client = redisService
 
 
-# Function to initialize user scores data from a YAML file
-def initialize_user_scores_from_file(filename):
-    with open(filename, "r") as file:
-        data = yaml.safe_load(file)
-    return data
+def load_user_scores_data():
+    user_scores_data = redis_client.get_data("user_scores_data")
+
+    if user_scores_data is None:
+        user_scores_data = {"users": {}}
+
+    validate_data(user_scores_data,scores_data_schema)
+    
+    return user_scores_data
+
+# Function to save user scores data to Redis
+def save_user_scores_data(user_scores_data):
+    validate_data(user_scores_data, scores_data_schema)
+    
+    redis_client.set_data("user_scores_data", user_scores_data)
+
+# Validate data against a schema
+def validate_data(data, schema):
+    for field, field_info in schema.items():
+        if field in data:
+            field_type = field_info.get("type")
+            field_nullable = field_info.get("nullable", True)
+            
+            if not isinstance(data[field], field_type):
+                raise ValueError(f"Field '{field}' is of the wrong type.")
+            if not data[field] and not field_nullable:
+                raise ValueError(f"Field '{field}' cannot be null.")
+        else:
+            if not field_nullable:
+                raise ValueError(f"Field '{field}' is missing.")
 
 
-def save_user_scores_to_file(data, filename):
-    with open(filename, "w") as file:
-        yaml.dump(data, file)
+def extract_user_and_operator(text):
+    pattern = r"@([A-Z0-9]+) (\+\+|--)"
+    
+    match = re.search(pattern, text)
 
-
-def extract_user_and_operator(message):
-    parts = message.split()
-    if len(parts) == 2 and parts[1] in ("++", "--"):
-        return parts[0], parts[1]
-    return None, None
+    if match:
+        user = f"@{match.group(1)}"
+        operator = match.group(2)  
+        return user, operator
+    else:
+        return None  # No match found

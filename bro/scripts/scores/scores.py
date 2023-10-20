@@ -6,9 +6,10 @@ from . import services
 # Function to initialize user scores data from a YAML file
 
 def handle_user_score(message):
-    filename = "user_scores.yaml"
-    user_scores_data = services.initialize_user_scores_from_file(filename)
+ 
     user, operator = services.extract_user_and_operator(message)
+    user_scores_data = services.load_user_scores_data()
+    user_info = user_scores_data["users"].get(user)
 
     if user and operator:
         # Find the user in the data dictionary
@@ -23,16 +24,24 @@ def handle_user_score(message):
                 break
 
         # Save the updated data to the YAML file
-        services.save_user_scores_to_file(user_scores_data, filename)
+        services.save_user_scores_to_file(user_scores_data)
 
         return f"{user}\'s score is now {user_info['score']}. {compliment}"
 
 
 def handle_bro_scores_message():
-    filename = "user_scores.yaml"
-    user_scores_data = services.initialize_user_scores_from_file(filename)
     
-    blocks = [
+    user_scores_data = services.load_user_scores_data()
+
+    user_scores_message = "User Scores:\n"
+    for user, data in user_scores_data["users"].items():
+        user_scores_message += f"{user}: {data['score']}\n"
+
+    return user_scores_message
+
+
+
+    '''blocks = [
         {
             "type": "section",
             "block_id": "user_scores",
@@ -45,11 +54,6 @@ def handle_bro_scores_message():
             "type": "divider"
         }
     ]
-
-    # Add user scores information to the blocks
-    for user_info in user_scores_data.get("users", []):
-        name = user_info["name"]
-        score = user_info["score"]
         blocks.append(
             {
                 "type": "section",
@@ -71,4 +75,4 @@ def handle_bro_scores_message():
         "blocks": blocks
     }
     
-    return view_data
+    return view_data'''

@@ -1,43 +1,48 @@
 from . import services
-import yaml
-# Function to manage key ownership data
+from . import services
+
+
+        
 def handle_key_claim(message):
-    # Initialize key ownership data from a YAML file
-    filename = "keys_data.yaml"
-    keys_data = services.load_keys_data(filename)
+    keys_data = services.load_keys_data()
 
     user_id, key_name = services.extract_user_and_key(message)
 
     if user_id and key_name:
-            # Update the owner of the key in the data dictionary
-        for key_info in keys_data.get("keys", []):
-            if key_info["name"] == key_name:
-                key_info["owner"] = user_id
-                break
+        keys_data["keys"][key_name] = {"owner": user_id}
 
-            # Save the updated data to the YAML file
-            services.save_keys_data(keys_data, filename)
+        services.save_keys_data(keys_data)
 
-            return f"<{user_id}> now has {key_name}."
+        return f"<{user_id}> now has {key_name}."
+    
 
-   
+
 def handle_bro_keys_message():
-     
-    with open('keys_data.yaml', "r") as file:
-            keys_data = yaml.safe_load(file)
-            print(keys_data)
-   
-     
+    keys_data = services.load_keys_data()
 
-    # Generate a table of key ownership using Slack Bolt blocks
-        
+    result = ""
 
-    for key_info in keys_data.get("keys", []):
-        key = key_info["name"]
-        owner = key_info["owner"] if key_info["owner"] else "null"
-        return f"*{key}* : {owner} \n"
+    for key, data in keys_data.get("keys", {}).items():
+        owner = data.get("owner")
+        result += f"*{key}* : {owner}\n"
 
-        """blocks = [
+    return result
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """blocks = [
         {
         "type": "section",
         "block_id": "key_ownership",
@@ -52,7 +57,7 @@ def handle_bro_keys_message():
     ]
     """
         
-        """blocks.append(
+    """blocks.append(
             {
                 "type": "section",
                 "text": {
