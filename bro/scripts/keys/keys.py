@@ -12,13 +12,13 @@ def handle_key_claim(message):
     if user_id and key_name:
         keyNames = ""
         for key , value in keys_data.items():
-            keyNames = value["key_name"] + " "
+            keyNames += value["key_name"] + ",\n"
             if(value["key_name"] == key_name):
                 value["owner"] = user_id
                 services.save_keys_data(keys_data)
                 print("yaha tak")
                 return f"{user_id} now has {key_name}."
-        return f"key name not vallid, here are the valid key: {keyNames}"    
+        return f"key name not vallid, here are the valid key:\n{keyNames}"    
         
 
 
