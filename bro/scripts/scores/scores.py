@@ -1,5 +1,4 @@
 import os
-import yaml
 from slack_bolt import App
 from . import services
 
@@ -29,7 +28,7 @@ def handle_user_score(message):
         return f"{user}\'s score is now {user_info['score']}. {compliment}"
 
 
-def handle_bro_scores_message():
+def handle_bro_scores_message(message):
     
     user_scores_data = services.load_user_scores_data()
 

@@ -31,7 +31,6 @@ class RedSis:
     except:
       print(f"[REDIS] error in setting the value [{key}]")
   
-  
   def getValue(self, key):
     try:
             data_json = self.r.get(key)
@@ -43,10 +42,33 @@ class RedSis:
     except Exception as e:
             print(f"Error in getting data: {str(e)}")
             return None
+    
+
+lol = RedSis()
+lol.redisInit()
+
+keys_data = {
+    "key1": {
+        "key_name": "key1",
+        "owner": None,
+    },
+    "key2": {
+        "key_name": "key2",
+        "owner": None,
+    },
+    "key3": {
+        "key_name": "key3",
+        "owner": None,
+    },
+    "key4": {
+        "key_name": "key4",
+        "owner": None,
+    },
+}
 
 
-# lol = RedSis()
-# lol.redisInit()
+# lol.setValue("keys_data", keys_data)
+print(lol.getValue("keys_data"))
   
 
 if __name__ == "__main__":

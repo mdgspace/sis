@@ -7,25 +7,32 @@ def handle_key_claim(message):
     keys_data = services.load_keys_data()
 
     user_id, key_name = services.extract_user_and_key(message)
+    print(user_id, key_name)
 
     if user_id and key_name:
-        keys_data["keys"][key_name] = {"owner": user_id}
+        keyNames = ""
+        for key , value in keys_data.items():
+            keyNames = value["key_name"] + " "
+            if(value["key_name"] == key_name):
+                value["owner"] = user_id
+                services.save_keys_data(keys_data)
+                print("yaha tak")
+                return f"{user_id} now has {key_name}."
+        return f"key name not vallid, here are the valid key: {keyNames}"    
+        
 
-        services.save_keys_data(keys_data)
-
-        return f"<{user_id}> now has {key_name}."
-    
 
 
-def handle_bro_keys_message():
+def handle_bro_keys_message(message):
     keys_data = services.load_keys_data()
 
     result = ""
 
-    for key, data in keys_data.get("keys", {}).items():
-        owner = data.get("owner")
-        result += f"*{key}* : {owner}\n"
-
+    for key, value in keys_data.items():
+        key_name = value["key_name"]
+        owner = value["owner"]
+        result += f"*{key_name}* : {owner}\n"
+        
     return result
 
     

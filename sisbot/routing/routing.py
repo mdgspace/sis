@@ -28,7 +28,7 @@ def route(message: str):
         if re.match(pattern[0], message):
             print(f"Matched {pattern[0]}")
             # Not returning here so that allpatterns are matched
-            response = pattern[1]()
+            response = pattern[1](message)
     return response
 
 

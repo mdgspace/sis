@@ -4,25 +4,32 @@ from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
 
 
 
-def yo():
+def yo(message):
     print("bro.views.yo()")
     return "yo"
 
 
-def bro():
+def bro(message):
     print("bro.views.bro()")
     return "bro"
 
 
 def bro_keys_claim(message):
-   handle_key_claim(message)
+    return handle_key_claim(message)
+    
 
-def bro_keys(): 
-    handle_bro_keys_message()
+def bro_keys(message): 
+    return handle_bro_keys_message(message)
 
 def bro_user_scores(message):
-    handle_user_score(message)
+    return handle_user_score(message)
 
-def bro_score_message():
-    handle_bro_scores_message()
+def bro_score_message(message):
+    return handle_bro_scores_message(message)
 
+def bro_ping(message):
+    return "pong"
+
+def testing_message(message):
+    print(message)
+    return "test-ed"
