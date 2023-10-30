@@ -7,9 +7,9 @@ patterns = [
     (r"^bro who has keys$", views.bro_keys),
     
     (r"^bro scores$", views.bro_score_message),
-    (r"<@(.{11})> \+\+|<@(.{11})>\+\+|<@(.{11})>--|<@(.{11})> --" , views.handle_user_score),
+    (r"<@(.{11})>(\+\+)|<@(.{11})>.(\+\+)|<@(.{11})>(\-\-)|<@(.{11})>.(\-\-)" , views.bro_user_scores),
     (r"bro ping", views.bro_ping),
-    (r"bro test test1", views.testing_message)
-
+    (r"bro test test1", views.testing_message),
+   
     
 ]

@@ -43,33 +43,14 @@ class RedSis:
             print(f"Error in getting data: {str(e)}")
             return None
     
-
-lol = RedSis()
-lol.redisInit()
-
-keys_data = {
-    "key1": {
-        "key_name": "key1",
-        "owner": None,
-    },
-    "key2": {
-        "key_name": "key2",
-        "owner": None,
-    },
-    "key3": {
-        "key_name": "key3",
-        "owner": None,
-    },
-    "key4": {
-        "key_name": "key4",
-        "owner": None,
-    },
-}
+def main():
+   
+  lol = RedSis()
+  lol.redisInit()
+# lol.setValue("hello","world")
+# print(lol.getValue("hello"))
 
 
-# lol.setValue("keys_data", keys_data)
-print(lol.getValue("keys_data"))
-  
 
 if __name__ == "__main__":
-    pass
+    main()
