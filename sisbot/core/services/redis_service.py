@@ -2,6 +2,7 @@ import redis
 import os
 from dotenv import load_dotenv
 import json
+import csv
 
 load_dotenv()
 
@@ -16,7 +17,7 @@ class RedSis:
         password=os.environ.get("REDIS_PASSWORD")
       )
       #could be better connections depending on the bot using the store
-      print("[REDIS] Connection successful")
+      # print("[REDIS] Connection successful")
     except:
       print("[REDIS] Connection Failed")
     
@@ -44,32 +45,57 @@ class RedSis:
             return None
     
 
-lol = RedSis()
-lol.redisInit()
-
-keys_data = {
-    "key1": {
-        "key_name": "key1",
-        "owner": None,
-    },
-    "key2": {
-        "key_name": "key2",
-        "owner": None,
-    },
-    "key3": {
-        "key_name": "key3",
-        "owner": None,
-    },
-    "key4": {
-        "key_name": "key4",
-        "owner": None,
-    },
-}
 
 
-# lol.setValue("keys_data", keys_data)
-print(lol.getValue("keys_data"))
+# # lol.setValue("keys_data", keys_data)
+# print(lol.getValue("keys_data"))
+
+
+# with open('data.csv', 'r') as file:
+#     csv_reader = csv.reader(file)
+#     header = next(csv_reader)
+
+#     for row in csv_reader:
+#         member = {
+#             "slackMemberId": "",
+#             "displayName":"",
+        
+#             "name": row[0],
+        
+#             "phoneNo":row[1],
+#             "emailId" : row[2],
+#             "dob" : row[3],
+#             "Year" : row[4],
+#             "Branch": row[5],
+#             "enrollmentNo" : row[6],
+#             "roomNo" : row[7],
+#             "githubId": row[8],
+#             "fbId": row[9],
+#             "homeAddress":row[12],
+            
+#             "score" : "",
+#             "roles" : []
+#         }
+#         # print(row)
+#         members.append(member)
+        
+    
+# userDb = {
+#   "members":members
+# }
+
+
+def main():
+  # lol.setValue("userDBtest", user_db)
+  lol = RedSis()
+  lol.redisInit()
+  lol.setValue('hell', 'hi')
+  print(lol.getValue('hell'))
+  lol.setValue('hell', 'new')
+  print(lol.getValue('hell'))
+  
+
   
 
 if __name__ == "__main__":
-    pass
+    main()

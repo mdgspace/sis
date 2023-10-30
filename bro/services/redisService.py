@@ -26,28 +26,31 @@ class RedSis:
         value_json = json.dumps(value)
         self.r.set(key, value_json)
         return
-
-      self.r.set(key, value)
-    except:
-      print(f"[REDIS] error in setting the value [{key}]")
+      self.r.set('key', 'value')
+    except Exception as e:
+      print(f"[REDIS] error in setting the value [{key}] : {str(e)}")
   
   
   def getValue(self, key):
     try:
-            data_json = self.r.get(key)
-            if data_json is not None:
-                data = json.loads(data_json.decode('utf-8'))
-                return data
-            else:
-                return None
-    except Exception as e:
-            print(f"Error in getting data: {str(e)}")
+        data_json = self.r.get(key)
+        if data_json is not None:
+            data = json.loads(data_json.decode('utf-8'))
+            return data
+        else:
             return None
+    except Exception as e:
+        print(f"Error in getting data: {str(e)}")
+        return None
 
+def main():
+  lol = RedSis()
+  lol.redisInit()
+  lol.setValue('hell', 'hi')
+  print(lol.getValue('hell'))
+  lol.setValue('hell', 'new')
+  print(lol.getValue('hell'))
 
-# lol = RedSis()
-# lol.redisInit()
-  
 
 if __name__ == "__main__":
-    pass
+    main()
