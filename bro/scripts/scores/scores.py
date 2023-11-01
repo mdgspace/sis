@@ -2,11 +2,57 @@ import os
 from slack_bolt import App
 from ...services import dB
 from . import services
+from collections import defaultdict
+import re
 # Function to initialize user scores data from a YAML file
 
 def handle_user_score(message):
- 
-    user, operator = services.extract_user_and_operator(message)
+    user_data = dB.load_user_data()
+    
+    print('hi')
+    user_operators = defaultdict(list)
+    pattern = r'<@(\w+)>\s*(\+\+|\-\-)'
+
+    matches = re.finditer(pattern , message)
+
+    for match in matches:
+        user , operator = match.groups()
+        print(user_data[user]['score'])
+        user_operators[user].append(operator)  
+    print(user_operators)
+
+
+    compliments = {
+        "++": "Great job! Your score increased by 1.",
+        "--": "Oops! Your score decreased by 1."
+    }
+
+    print(user_operators.items())
+
+    compliment_messages = []
+
+    for user, operators in user_operators.items():
+        print(user)
+        for operator in operators:
+            print(operator)
+            if operator == '++':
+                user_data[user]['score'] = str(int(user_data[user]['score']) + 1)
+                compliment_messages.append(f"{compliments['++']}. <@{user}> your score is now {user_data[user]['score']}")
+            elif operator == '--':
+                user_data[user]['score'] = str(int(user_data[user]['score']) - 1)
+                compliment_messages.append(f"{compliments['--']}. <@{user}> your score is now {user_data[user]['score']}")
+            
+
+    dB.save_user_data(user_data)
+
+    compliment_message = '\n'.join(compliment_messages)
+
+    return compliment_message
+    
+
+
+    '''user, operator = services.extract_user_and_operator(message)
+    user 
     print(f"{user} , {operator}")
 
     user_data = dB.load_user_data()
@@ -30,7 +76,7 @@ def handle_user_score(message):
 
     return f"<@{user}>\'s score is now {user_info['score']}.{compliment}"
 
-
+'''
 def handle_bro_scores_message(message):
     
     user_data = dB.load_user_data()
