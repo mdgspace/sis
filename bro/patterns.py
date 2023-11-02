@@ -12,6 +12,6 @@ patterns = [
     (r"bro test test1", views.testing_message),
     (r"bro animate me (.+)" , views.google_animate_query),
     (r"bro image me (.+)" , views.google_image_query),
-
+    (r"bro map me (.+)" , views.google_map_query)
     
 ]

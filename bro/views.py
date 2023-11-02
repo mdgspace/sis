@@ -2,7 +2,8 @@
 from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
 from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
 from .scripts.info.info import handle_user_info
-from .scripts.google_cse.google_cse import handle_google_image_query,handle_google_animate_query
+from .scripts.google.google_cse import handle_google_image_query,handle_google_animate_query
+from .scripts.google import google_maps
 
 
 def yo(message):
@@ -43,3 +44,6 @@ def google_image_query(message):
 
 def google_animate_query(message):
    return handle_google_animate_query(message)
+
+def google_map_query(message):
+    return google_maps.handle_google_map_query(message)
