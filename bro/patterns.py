@@ -10,6 +10,8 @@ patterns = [
     (r"<@(\w+)>\s*(\+\+|\-\-)" , views.bro_user_scores),
     (r"bro ping", views.bro_ping),
     (r"bro test test1", views.testing_message),
-   
+    (r"bro animate me (.+)" , views.google_animate_query),
+    (r"bro image me (.+)" , views.google_image_query),
+
     
 ]

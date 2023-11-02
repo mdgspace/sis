@@ -2,6 +2,7 @@
 from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
 from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
 from .scripts.info.info import handle_user_info
+from .scripts.google_cse.google_cse import handle_google_image_query,handle_google_animate_query
 
 
 def yo(message):
@@ -36,3 +37,9 @@ def testing_message(message):
 
 def user_info(message):
     return handle_user_info(message)
+
+def google_image_query(message):
+    return handle_google_image_query(message)
+
+def google_animate_query(message):
+   return handle_google_animate_query(message)
