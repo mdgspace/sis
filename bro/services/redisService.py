@@ -46,6 +46,17 @@ class RedSis:
             print(f"Error in getting data: {str(e)}")
             return None
 
+'''
+redis_client = RedSis()
+redis_client.redisInit()
+lab_status = {
+   "status" : "open",
+}
+redis_client.setValue("test_lab_status" , lab_status)
+status = redis_client.getValue("test_lab_status")
+print(status)'''
+
+                       
 
 
 if __name__ == "__main__":
@@ -101,5 +112,3 @@ print(all_data)"""
 
   
 
-if __name__ == "__main__":
-    pass

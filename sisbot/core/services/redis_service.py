@@ -47,6 +47,7 @@ def main():
    
   lol = RedSis()
   lol.redisInit()
+  
 # lol.setValue("hello","world")
 # print(lol.getValue("hello"))
 
