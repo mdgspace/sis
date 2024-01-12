@@ -11,7 +11,8 @@ slack-bolt = "^1.18.0"
 pyyml = "^0.0.2"
 python-dotenv = "^1.0.0"
 redis = "^5.0.1"
-schedule = "^1.2.1"
+certifi = "^2023.7.22"
+axios = "^0.4.0"
 
 
 

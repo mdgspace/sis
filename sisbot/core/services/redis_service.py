@@ -90,10 +90,8 @@ class RedSis:
 def main():
   # lol.setValue("userDBtest", user_db)
   lol = RedSis()
-  lol.redisInit()
-  
 
-  
+
 
 if __name__ == "__main__":
     main()

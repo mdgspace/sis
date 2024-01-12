@@ -1,6 +1,7 @@
 
 from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
 from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
+<<<<<<< HEAD
 from .scripts.bye.bye import goodNight
 from .scripts.roles.roles import handleSetRole,handleGetRole, handleDeleteRole
 from .scripts.batchScore.batchScore import getBatchScore
@@ -11,6 +12,14 @@ from datetime import datetime
 
 
 
+=======
+from .scripts.info.info import handle_user_info
+from .scripts.google.google_cse import handle_google_image_query,handle_google_animate_query
+from .scripts.google import google_maps
+from .scripts.api_scripts import bro_quotes
+from .scripts.api_scripts import random
+from .scripts.lab.lab import handle_lab_status, handle_isLab_status
+>>>>>>> 7884ed8e9c1a3d7d73a4b724cc0939001ba2504e
 
 def yo(message):
     print("bro.views.yo()")
@@ -97,3 +106,29 @@ def birthday(message):
 
 def gethelp(message):
     return help(message)
+def user_info(message):
+    return handle_user_info(message)
+
+def google_image_query(message):
+    return handle_google_image_query(message)
+
+def google_animate_query(message):
+   return handle_google_animate_query(message)
+
+def google_map_query(message):
+    return google_maps.handle_google_map_query(message)
+
+def bro_quote(message):
+    return bro_quotes.handle_quote(message)
+
+def bro_toss(message):
+    return random.random_toss(message)
+
+def bro_dice(message):
+    return random.random_dice(message)
+
+def bro_lab_status(message):
+    return handle_lab_status(message)
+
+def bro_isLab_status(message):
+    return handle_isLab_status(message)

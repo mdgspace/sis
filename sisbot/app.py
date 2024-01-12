@@ -18,6 +18,64 @@ app = App(
 
 # Initialize routing
 init()
+'''
+def populate():
+    realNameToSlackId = {}
+    userDB = {}
+    
+    redisStore = redis_service.RedSis()
+    redisStore.redisInit()
+    
+    listed = app.client.users_list()
+    memberList = listed["members"]
+    
+    for member in memberList:
+        if(member.get('real_name', False)):
+            realNameToSlackId[member["real_name"]] = {
+                "id" : member["id"],
+                "displayName" : member["profile"]['display_name']
+            }
+        
+     with open('data.csv', 'r') as file:
+        csv_reader = csv.DictReader(file)
+        
+        for row in csv_reader:
+            # print(f'{row["Name"]} : if condition: {realNameToSlackId.get(row["Name"], False)}')
+            if(realNameToSlackId.get(row["Name"], False)):
+                userId = realNameToSlackId[row["Name"]]['id']
+                displayName = realNameToSlackId[row["Name"]]['displayName']
+                
+                userDB[userId] = {
+                    "displayName": displayName,
+                
+                    "name": row["Name"],
+                
+                    "phoneNo":row['Phone No'],
+                    "emailId" : row['Email Id'],
+                    "dob" : row["DOB(dd/mm/yyyy)"],
+                    "Year" : row['Year'],
+                    "Branch": row['Branch'],
+                    "enrollmentNo" : row['Enrollment Number'],
+                    "roomNo" : row['Room No'],
+                    "gitHubId" : row['GITHUB ID'],
+                    "slackUserId": row['SLACK USER ID'],
+                    
+                    "score" : "0",
+                    "roles" : []
+                }    
+    redisStore.setValue("userDBtest1",userDB)
+    #print(redisStore.getValue("userDBtest1"))
+
+    redisStore.setValue('nameToUserId' , realNameToSlackId)
+   # print(redisStore.getValue('nameToUserId'))
+
+populate()
+
+'''
+   
+
+
+
 
 def populate():
     realNameToSlackId = {}
@@ -94,6 +152,7 @@ def message_hello(message, say):
     response = route(message["text"])
     if response != None and response != "":
         say(response)
+
 
 
 if __name__ == "__main__":
