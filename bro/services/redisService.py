@@ -16,7 +16,7 @@ class RedSis:
         password=os.environ.get("REDIS_PASSWORD")
       )
       #could be better connections depending on the bot using the store
-      print("[REDIS] Connection successful")
+      # print("[REDIS] Connection successful")
     except:
       print("[REDIS] Connection Failed")
     

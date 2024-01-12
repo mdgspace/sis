@@ -1,3 +1,23 @@
+key =  {
+    "key1": {
+        "key_name": "key1",
+        "owner":"str",
+    },
+    "key2": {
+        "key_name": "key1",
+        "owner":"str",
+    },
+    "key3": {
+        "key_name": "key1",
+        "owner":"str",
+    },
+    "key4": {
+        "key_name": "key1",
+        "owner":"str",
+    },
+}
+
+
 
 userDB = {
     "U24984573945":{
@@ -40,6 +60,16 @@ userDB = {
         "roles" : ["role1", "role2"]
         // "membershipStatus": "active"
     },
+}
+
+batches = {
+    "4y":[
+        "U24984573945",
+        "U24984573945"
+    ],
+    "3y": [
+        
+    ]
 }
 
 

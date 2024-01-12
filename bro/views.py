@@ -3,7 +3,12 @@ from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
 from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
 from .scripts.bye.bye import goodNight
 from .scripts.roles.roles import handleSetRole,handleGetRole, handleDeleteRole
+from .scripts.batchScore.batchScore import getBatchScore
+from .scripts.birthday.birthday import getBirthday
+from .scripts.help import help
 import re
+from datetime import datetime
+
 
 
 
@@ -57,3 +62,38 @@ def getRole(message):
     userId = re.findall(pattern, message)[0]
     
     return handleGetRole(userId)
+
+def batchScore(message):
+    pattern1 = r'b(\d\d)'
+    pattern2 = r'[\d]y'
+    batch = re.findall(pattern1, message)
+    currentYear = (int(datetime.now().year)) %100
+    if(batch):
+        batch = int(re.findall(pattern1, message)[0])
+        if(batch>=currentYear and batch<=currentYear+3):
+            batch = str(4 - (batch - currentYear)) + 'y'
+            return getBatchScore(message,batch)
+        elif(batch<currentYear):
+            return f'Not worth scores anymore ;)'
+        else:
+            return f'They\'re not here yet!'
+    else:
+        batchNo = int (re.findall(pattern2, message)[0].replace('y',''))
+        batch = re.findall(pattern2, message)[0]
+        if(batchNo>4):
+            return f'Not worth scores anymore ;)'
+        print(batch)
+        return getBatchScore(message, batch)
+                    
+
+    # if(batch == 'b26' or batch == '4y'):
+    #     return batchScore(message, 'b26')
+        
+def birthday(message):
+    pattern = r'@([\w .\-_]+)'
+    userId = re.findall(pattern, message)[0]
+    
+    return getBirthday(userId)
+
+def gethelp(message):
+    return help(message)

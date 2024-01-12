@@ -22,6 +22,7 @@ init()
 def populate():
     realNameToSlackId = {}
     userDB = {}
+    batches = {}
     
     redisStore = redis_service.RedSis()
     redisStore.redisInit()
@@ -35,7 +36,7 @@ def populate():
                 "id" : member["id"],
                 "displayName" : member["profile"]['display_name']
             }
-        
+        #add email func
     with open('data.csv', 'r') as file:
         csv_reader = csv.DictReader(file)
         
@@ -44,6 +45,13 @@ def populate():
             if(realNameToSlackId.get(row["Name"], False)):
                 userId = realNameToSlackId[row["Name"]]['id']
                 displayName = realNameToSlackId[row["Name"]]['displayName']
+                
+                if not (batches.get(row['Year'], False)):
+                    batches[row['Year']] = []
+                
+                batches[row['Year']].append(userId)
+                
+                
                 
                 userDB[userId] = {
                     "displayName": displayName,
@@ -69,7 +77,10 @@ def populate():
     # print(redisStore.getValue("userDBtest1"))
     # redisStore.setValue("nameToUserId",realNameToSlackId)
     # print(redisStore.getValue("nameToUserId"))
-
+    # redisStore.setValue("batchesData",batches)
+    # print(redisStore.getValue("batchesData"))
+    
+    
 # populate()
 
 
@@ -79,6 +90,7 @@ def populate():
 @app.message()
 def message_hello(message, say):
     sender = message['user']
+    channelId = message['channel']
     response = route(message["text"])
     if response != None and response != "":
         say(response)

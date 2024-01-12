@@ -7,6 +7,7 @@ patterns = [
     
     (r"^bro scores$", views.bro_score_message),
     (r"<@(.{11})> \+\+|<@(.{11})>\+\+|<@(.{11})>--|<@(.{11})> --" , views.handle_user_score),
+    (r"bro score (\w+)$", views.batchScore),
     
     (r"bro ping", views.bro_ping),
     (r"bro test test1", views.testing_message),
@@ -14,8 +15,12 @@ patterns = [
     (r"(good night|goodnight|cya|bye|nighty night)", views.bye),
     
     (r"bro who is <@(.{11})>", views.getRole),
-    (r'bro <@(.{11})> is (\w+)', views.setRole)
+    (r'bro <@(.{11})> is (\w+)', views.setRole),
     # (r'bro <@(.{11})> is (\w+)', views.setRole)
+    
+    
+    (r"bro birthday <@(.{11})>", views.birthday),
+    (r'bro help', views.help)
     
     
     

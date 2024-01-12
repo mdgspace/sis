@@ -85,14 +85,12 @@ class RedSis:
 # }
 
 
+
+
 def main():
   # lol.setValue("userDBtest", user_db)
   lol = RedSis()
   lol.redisInit()
-  lol.setValue('hell', 'hi')
-  print(lol.getValue('hell'))
-  lol.setValue('hell', 'new')
-  print(lol.getValue('hell'))
   
 
   
