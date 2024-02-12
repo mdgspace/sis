@@ -1,7 +1,6 @@
 
 from .scripts.keys.keys import handle_key_claim , handle_bro_keys_message
 from .scripts.scores.scores import handle_bro_scores_message, handle_user_score
-<<<<<<< HEAD
 from .scripts.bye.bye import goodNight
 from .scripts.roles.roles import handleSetRole,handleGetRole, handleDeleteRole
 from .scripts.batchScore.batchScore import getBatchScore
@@ -12,14 +11,12 @@ from datetime import datetime
 
 
 
-=======
 from .scripts.info.info import handle_user_info
 from .scripts.google.google_cse import handle_google_image_query,handle_google_animate_query
 from .scripts.google import google_maps
 from .scripts.api_scripts import bro_quotes
 from .scripts.api_scripts import random
 from .scripts.lab.lab import handle_lab_status, handle_isLab_status
->>>>>>> 7884ed8e9c1a3d7d73a4b724cc0939001ba2504e
 
 def yo(message):
     print("bro.views.yo()")
