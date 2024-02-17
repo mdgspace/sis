@@ -2,6 +2,7 @@ import os
 import re
 from importlib import import_module
 
+
 allowed_patterns = []
 
 
@@ -10,7 +11,10 @@ def init():
 
 
 def load_apps():
-    apps = list(os.environ.get("APPS").split(","))
+    apps = [
+        "sis" , 
+        "bro"
+            ]
     # apps = ["bro", "sis"]
     for app in apps:
         mod = import_module(f"{app}.patterns")
@@ -24,9 +28,13 @@ def route(message: str):
         if re.match(pattern[0], message):
             print(f"Matched {pattern[0]}")
             # Not returning here so that allpatterns are matched
-            response = pattern[1]()
+            response = pattern[1](message)
     return response
 
 
 if __name__ == "__main__":
     load_apps()
+
+
+
+
